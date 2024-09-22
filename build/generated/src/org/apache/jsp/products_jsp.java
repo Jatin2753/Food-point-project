@@ -170,7 +170,7 @@ public final class products_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t<ul class=\"special_items\">\n");
       out.write("\t\t\t\t\t<li><a href=\"about.html\">About Us</a><i>/</i></li>\n");
       out.write("\t\t\t\t        <li><a href=\"services.html\">Services</a><i>/</i></li>\n");
-      out.write("                                        <li><a href=\"/food_point/admin/web/register.jsp\">Are You A Retailer?</a></li>\n");
+      out.write("                                        <li><a href=\"/food_point/admin/web/login.jsp\">Are You A Retailer?</a></li>\n");
       out.write("\t\t\t\t</ul>\n");
       out.write("\t\t\t</div>\n");
       out.write("\t\t\t<div class=\"w3ls_logo_products_left1\">\n");
@@ -319,7 +319,7 @@ public final class products_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                                    <p>");
       out.print( ps.getString("product_name"));
       out.write("</p>\n");
-      out.write("                                                    <h4>");
+      out.write("                                                    <h4>&#8377;");
       out.print( ps.getString("product_price"));
       out.write("</h4>\n");
       out.write("                                                </div>\n");
