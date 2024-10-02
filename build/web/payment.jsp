@@ -7,6 +7,18 @@
     </head>
 
     <body>
+        <%
+            try {
+                            
+                            if (session.getAttribute("login") != null) {
+
+                            } else {
+                                response.sendRedirect("userregisterform.jsp");
+
+                            }
+            }catch(Exception obj){}
+        %>
+         
 
         <%@ include file="header.jsp" %>
         <div class="products-breadcrumb">

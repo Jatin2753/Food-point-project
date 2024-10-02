@@ -22,43 +22,49 @@
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav nav_1">
                     <%
-                       
                         Logger logger = Logger.getLogger("MyLogger");
                         try {
-                            ResultSet rsi = food.DataUtility.executeDQL("SELECT category_name,id FROM category ORDER BY category_name");
+                            String categoryQuery = "SELECT id, category_name FROM category ORDER BY category_name";
+                            ResultSet rsi = food.DataUtility.executeDQL(categoryQuery);
+
                             if (rsi != null) {
                                 while (rsi.next()) {
                                     int cid = rsi.getInt("id");
-                                    
-                                    ResultSet rsc = food.DataUtility.executeDQL("SELECT category_name FROM category WHERE id NOT IN (SELECT id FROM subcat)");
-                                    if (rsc.next()) {
+                                    String categoryName = rsi.getString("category_name");
+
+                                    String subCategoryCheckQuery = "SELECT COUNT(*) AS subcat_count FROM subcat WHERE catid = '" + cid + "'";
+                                    ResultSet subcatCheck = food.DataUtility.executeDQL(subCategoryCheckQuery);
+
+                                    if (subcatCheck.next() && subcatCheck.getInt("subcat_count") > 0) {
                     %>
-                                        <li><a href="#"><%= rsi.getString("category_name") %></a></li>
-                    <%
-                                    } else {
-                    %>
-                                        <li class="dropdown mega-dropdown active">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= rsi.getString("category_name") %><span class="caret"></span></a>
+                                        <li class="dropdown mega-dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <%= categoryName %><span class="caret"></span>
+                                            </a>
                                             <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
                                                 <div class="w3ls_vegetables">
                                                     <ul>
-                    <%
-                                                        ResultSet rssc = food.DataUtility.executeDQL("SELECT subcat_name,id FROM subcat WHERE catid = '"+cid+"' ORDER BY subcat_name;");
-                                                        if (rssc != null) {
-                                                            while (rssc.next()) {
-                    %>
-                                               <li><a href="products.jsp?productid=<%= rssc.getString("id")%>"><%= rssc.getString("subcat_name") %></a></li>
-                                                                <hr>
-                    <%
+                                                        <%
+                                                            String subCategoryQuery = "SELECT subcat_name, id FROM subcat WHERE catid = '" + cid + "' ORDER BY subcat_name";
+                                                            ResultSet rssc = food.DataUtility.executeDQL(subCategoryQuery);
+
+                                                            while (rssc != null && rssc.next()) {
+                                                        %>
+                                                            <li><a href="products.jsp?productid=<%= rssc.getString("id") %>">
+                                                                <%= rssc.getString("subcat_name") %></a>
+                                                            </li>
+                                                            <hr>
+                                                        <%
                                                             }
-                                                        } else {
-                                                            logger.log(Level.WARNING, "No subcategories found for category: " + cid);
-                                                        }
-                    %>
+                                                        %>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </li>
+                    <%
+                                    } else {
+                    %>
+                                        <li><a href="#"><%= categoryName %></a></li>
                     <%
                                     }
                                 }
@@ -76,6 +82,7 @@
             <!-- /.navbar-collapse -->
         </nav>
     </div>
+
     <div class="w3l_banner_nav_right">
         <section class="slider">
             <div class="flexslider">
@@ -108,7 +115,7 @@
             </div>
         </section>
         <!-- flexSlider -->
-        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
         <script defer src="js/jquery.flexslider.js"></script>
         <script type="text/javascript">
             $(window).load(function () {

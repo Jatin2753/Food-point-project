@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
+    
+    double gtotal = 0, tax = 0, dis = 0;
+
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
@@ -185,7 +188,17 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </ul>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
-      out.write("        <div class=\"checkout\">\n");
+      out.write("        ");
+
+            if(request.getParameter("del")!=null){
+                String del=request.getParameter("del");
+                String sql="DELETE FROM tblshopingcart WHERE id=" + del;
+                int rdel = food.DataUtility.executeDML(sql);
+            }
+            
+      out.write("\n");
+      out.write("            \n");
+      out.write("              <div class=\"checkout\">\n");
       out.write("            <div class=\"container\">\n");
       out.write("                <h3>My Shopping Bag</h3>\n");
       out.write("                <div class=\"table-responsive checkout-right animated wow slideInUp\" data-wow-delay=\".5s\">\n");
@@ -200,7 +213,21 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <th>Total</th>\n");
       out.write("                            </tr>\n");
       out.write("                        </thead>\n");
-      out.write("                        <tr class=\"rem1\">\n");
+      out.write("            ");
+
+            try{
+                if(session.getAttribute("cart")!=null){
+                  String sessionid=session.getAttribute("cart").toString();
+                  String sql="SELECT tblshopingcart.id,tblshopingcart.qty,tblshopingcart.rate,tblshopingcart.sessionid,tblshopingcart.total,product.product_name,product.img1 FROM product INNER JOIN tblshopingcart ON product.id=tblshopingcart.pid WHERE sessionid='"+sessionid+"'";
+                  ResultSet proc = food.DataUtility.executeDQL(sql);
+                   gtotal = 0;
+                                    while (proc.next()) {
+                                        gtotal += proc.getFloat("total");
+                                        
+                                        
+                                        
+      out.write("\n");
+      out.write("                                          <tr class=\"rem1\">\n");
       out.write("                            <td class=\"invert-closeb\">\n");
       out.write("                                <form method=\"post\" name=\"del\" action=\"checkout.jsp\">\n");
       out.write("                                    <input type=\"hidden\" name=\"delid\" value=\"\" />\n");
@@ -229,6 +256,18 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <td class=\"invert\">&#8377;  </td>\n");
       out.write("                            <td class=\"invert\">&#8377; </td>\n");
       out.write("                        </tr>\n");
+      out.write("                                        \n");
+      out.write("                                        ");
+
+                                    }
+            }
+            }catch(Exception obj){
+                
+            }
+        
+      out.write("\n");
+      out.write("      \n");
+      out.write("                      \n");
       out.write("                        <!--quantity-->\n");
       out.write("                        <script>\n");
       out.write("                            $('.value-plus').on('click', function () {\n");
@@ -262,8 +301,6 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\t\n");
-      out.write("\n");
-      out.write("\n");
       out.write("        ");
       out.write("\n");
       out.write("\n");
@@ -415,7 +452,6 @@ public final class checkout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t</script>\n");
       out.write("</body>\n");
       out.write("</html>\n");
-      out.write("\n");
       out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");

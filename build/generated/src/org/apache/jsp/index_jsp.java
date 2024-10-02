@@ -354,8 +354,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"container\">\n");
       out.write("                <h3>Most Frequent Orders</h3>\n");
       out.write("                <div class=\"agile_top_brands_grids\">\n");
+      out.write("\n");
+      out.write("\n");
       out.write("                    ");
-
                         // Query for products with a limit of 4
                         ResultSet rsp = food.DataUtility.executeDQL("SELECT * FROM product ORDER BY product_name LIMIT 4");
                         while (rsp.next()) {
@@ -365,7 +366,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"hover14 column\">\n");
       out.write("                            <div class=\"agile_top_brand_left_grid\">\n");
       out.write("                                <div class=\"agile_top_brand_left_grid1\">\n");
-      out.write("                                     <figure>\n");
+      out.write("                                    <figure>\n");
       out.write("                                        <form action=\"cart.jsp\" method=\"post\"> \n");
       out.write("                                            <div class=\"snipcart-item block\">\n");
       out.write("                                                <div class=\"snipcart-thumb\">\n");
@@ -417,7 +418,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"row\">\n");
       out.write("                            ");
 
-                              
                                 ResultSet rsr = food.DataUtility.executeDQL("SELECT * FROM retailer ORDER BY shop_name");
                                 int count = 0;
                                 while (rsr.next()) {
@@ -425,7 +425,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                             
       out.write("</div><div class=\"row\">");
 
-                                    }
+                                }
                             
       out.write("\n");
       out.write("                            <div class=\"col-md-3 w3l_fresh_vegetables_grid\">\n");
@@ -439,12 +439,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <p>");
       out.print(rsr.getString("shop_name"));
       out.write("</p>\n");
-      out.write("                                   \n");
+      out.write("\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("                            ");
 
-                                count++;
+                                    count++;
                                 }
                             
       out.write("\n");
@@ -458,7 +458,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- //top-brands -->\n");
       out.write("\n");
       out.write("        ");
-      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");

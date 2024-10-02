@@ -18,6 +18,7 @@
                 int rru = food.DataUtility.executeDML(sql);
             }
 
-           
+        response.sendRedirect("index.jsp");
+ 
 
         %>

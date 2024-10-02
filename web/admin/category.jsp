@@ -3,6 +3,7 @@
     Created on : 23 Jun, 2024, 4:14:48 PM
     Author     : JATIN GUPTA
 --%>
+<%@page import="java.math.BigInteger"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -23,17 +24,24 @@
         </style>
     </head>
     <body>    
-        <%@include file="header.jsp" %>
+        <%--<%@include file="header.jsp" %>--%>
       
         <!-- /script-for sticky-nav -->
         <!--inner block start here-->
         <%
+            out.print("hii");
             if (request.getParameter("catname") != null) {
+                out.print("call1");
                 String catname = request.getParameter("catname");
+                out.print(catname);
                 String catorder = request.getParameter("catorder");
+                out.print(catorder);
                 String catdesc = request.getParameter("catdesc");
+                out.print(catdesc);
                 String sql = "INSERT INTO category(category_name, category_desc, category_order, dateon) VALUES('" + catname + "', '" + catdesc + "', " + catorder + ", NOW());";
+                out.print(sql);
                 int r = food.DataUtility.executeDML(sql);
+                out.print(r);
             }
         %>
       
@@ -72,7 +80,7 @@
     </div>
 </div>
 <!--slider menu-->
-<%@include file="sidebar.jsp" %>
+<%--<%@include file="sidebar.jsp" %>--%>
 <div class="clearfix"> </div>
 </div>
 <!--slide bar menu end here-->

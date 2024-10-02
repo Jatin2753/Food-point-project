@@ -15,8 +15,9 @@
             <div class="container">
                 <h3>Most Frequent Orders</h3>
                 <div class="agile_top_brands_grids">
-                    <%
-                        // Query for products with a limit of 4
+
+
+                    <%                        // Query for products with a limit of 4
                         ResultSet rsp = food.DataUtility.executeDQL("SELECT * FROM product ORDER BY product_name LIMIT 4");
                         while (rsp.next()) {
                     %>
@@ -24,7 +25,7 @@
                         <div class="hover14 column">
                             <div class="agile_top_brand_left_grid">
                                 <div class="agile_top_brand_left_grid1">
-                                     <figure>
+                                    <figure>
                                         <form action="cart.jsp" method="post"> 
                                             <div class="snipcart-item block">
                                                 <div class="snipcart-thumb">
@@ -61,24 +62,23 @@
                     <div class="col-md-12 w3l_fresh_vegetables_grid_right">
                         <div class="row">
                             <%
-                              
                                 ResultSet rsr = food.DataUtility.executeDQL("SELECT * FROM retailer ORDER BY shop_name");
                                 int count = 0;
                                 while (rsr.next()) {
                                     if (count % 4 == 0 && count > 0) {
                             %></div><div class="row"><%
-                                    }
+                                }
                             %>
                             <div class="col-md-3 w3l_fresh_vegetables_grid">
                                 <div class="w3l_fresh_vegetables_grid1">
                                     <img src="images/<%=rsr.getString("img")%>" alt=" " class="img-responsive" style="height: 200px" width="200px" />
                                     <h4><%=rsr.getString("owner_name")%></h4>
                                     <p><%=rsr.getString("shop_name")%></p>
-                                   
+
                                 </div>
                             </div>
                             <%
-                                count++;
+                                    count++;
                                 }
                             %>
                         </div>
